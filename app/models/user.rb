@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
     accepts_nested_attributes_for :address
     
-    validates :first_name, :last_name, :password, presence: true
+    validates :first_name, :last_name, :password_digest, presence: true
     
     geocoded_by :formated_address
     reverse_geocoded_by :latitude, :longitude
