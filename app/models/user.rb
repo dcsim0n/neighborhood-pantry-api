@@ -10,6 +10,7 @@ class User < ApplicationRecord
     validates :first_name, :last_name, :password, presence: true
     
     geocoded_by :formated_address
+    reverse_geocoded_by :latitude, :longitude
 
     def formated_address
         [self.address.street, self.address.city, self.address.state, self.address.zip].join(', ')
