@@ -1,11 +1,11 @@
 class User < ApplicationRecord
-    has_many :neighbors
-    has_many :claims
-    has_many :offers
-    has_many :pantry_items
-    has_many :pantry_requests
+    has_many :neighbors, dependent: :destroy
+    has_many :claims, dependent: :destroy
+    has_many :offers, dependent: :destroy
+    has_many :pantry_items, dependent: :destroy
+    has_many :pantry_requests, dependent: :destroy
     has_many :neighborhoods, through: :neighbors
-    has_one :address
+    has_one :address, dependent: :destroy
     has_secure_password
     after_validation :geocode
 

@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   resources :neighborhoods
   resources(:users, shallow:true) do 
     resources :pantry_items
+    resources :pantry_requests
     resources :neighborhoods
+    resources :offers
+    resources :claims
     
   end
   
