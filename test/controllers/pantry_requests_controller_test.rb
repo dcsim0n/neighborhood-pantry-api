@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NeighboorTest < ActiveSupport::TestCase
+class PantryRequestsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

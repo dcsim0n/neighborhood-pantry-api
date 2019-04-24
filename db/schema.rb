@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_203915) do
+ActiveRecord::Schema.define(version: 2019_04_24_194219) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_04_23_203915) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "city"
+  end
+
+  create_table "claims", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pantry_item_id"
+    t.integer "quantity"
+    t.boolean "aproved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "neighborhoods", force: :cascade do |t|
@@ -37,10 +46,29 @@ ActiveRecord::Schema.define(version: 2019_04_23_203915) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pantry_request_id"
+    t.integer "quantity"
+    t.boolean "accepted", default: false
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pantry_items", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.decimal "price"
+    t.integer "quantity"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pantry_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
     t.integer "quantity"
     t.string "unit"
     t.datetime "created_at", null: false
