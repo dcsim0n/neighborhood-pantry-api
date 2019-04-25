@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   resources :pantry_requests
   resources :claims
   resources :neighborhoods
-  resources(:users, shallow:true) do 
-    resources :pantry_items
-    resources :pantry_requests
-    resources :neighborhoods
-    resources :offers
-    resources :claims
+  resources(:users) do 
+    resources :pantry_items, shallow:true
+    resources :pantry_requests, shallow:true
+    resources :offers, shallow:true
+    resources :claims, shallow:true
+    resources :neighborhoods, only: :index
+    resources :neighbors, only: [:create, :delete]
     
   end
 

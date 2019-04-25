@@ -6,6 +6,7 @@ class Ability
   def initialize(user)
     if user.present?
       can :manage, [PantryItem, PantryRequest, Offer, Claim, Neighbor], user_id: user.id
+      can :read, Neighborhood
       can :create, [Neighborhood]
     end
     
