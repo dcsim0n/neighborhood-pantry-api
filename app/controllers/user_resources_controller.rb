@@ -1,6 +1,6 @@
 class UserResourcesController < ApplicationController
     def index
-        authorize! :read, associated_resources
+        authorize! :read, associated_resources.first
         render json: associated_resources, status: :ok
     end
     def create
@@ -14,7 +14,7 @@ class UserResourcesController < ApplicationController
             item.save
             render json: associated_resources, status: :ok
         else
-            render json: {errors: item.erros.full_messages}, status: :unprocessable_entity 
+            render json: {errors: item.errors.full_messages}, status: :unprocessable_entity 
         end
     end
 
