@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "/neighborhoods/search", to: "neighborhoods#search"
+  get "/neighborhoods/find", to: "neighborhoods#find"
+  
+  post "/login", to: "users#login"
+
   resources :offers
   resources :pantry_requests
   resources :claims
@@ -13,7 +18,5 @@ Rails.application.routes.draw do
     
   end
 
-  post "/login", to: "users#login"
-  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
