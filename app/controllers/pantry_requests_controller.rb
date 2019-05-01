@@ -1,7 +1,7 @@
 class PantryRequestsController < UserResourcesController
     
     def show
-        request = PantryRequest.find(params[:id])
+        request = PantryRequest.include(:offers).find(params[:id])
         authorize! :read, request
         render json: request.as_json({include: [{user: {only:[:id, :first_name]}},{offers: {include: {user:{only: [:id, :first_name]}}}}]}), status: :ok
     end
