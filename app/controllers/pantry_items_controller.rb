@@ -12,6 +12,9 @@ class PantryItemsController < UserResourcesController
     def associated_resources
         PantryItem.where(user_id: params[:user_id])
     end
+    def nested_response(items)
+        items.as_json({include:{claims:{include:{user:{only:[:id,:first_name]}}}}})
+    end
     def new_resource
         attributes = resource_params
         attributes = attributes.merge(user_id: params[:user_id])

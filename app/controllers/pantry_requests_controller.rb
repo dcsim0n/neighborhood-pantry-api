@@ -3,7 +3,7 @@ class PantryRequestsController < UserResourcesController
     def show
         request = PantryRequest.find(params[:id])
         authorize! :read, request
-        render json: request.as_json({include: [{user: {only:[:id, :first_name]}},:offers]}), status: :ok
+        render json: request.as_json({include: [{user: {only:[:id, :first_name]}},{offers: {include: {user:{only: [:id, :first_name]}}}}]}), status: :ok
     end
 
     private
@@ -14,7 +14,9 @@ class PantryRequestsController < UserResourcesController
     def associated_resources
         PantryRequest.where(user_id: params[:user_id])
     end
-
+    def nested_response(requests)
+        requests.as_json({include:{offers:{include:{user:{only:[:id,:first_name]}}}}})
+    end
     def new_resource
         request_attributes = resource_params
         #grab the user_id from the url param

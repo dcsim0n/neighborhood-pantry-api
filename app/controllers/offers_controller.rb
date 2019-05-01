@@ -6,6 +6,9 @@ class OffersController < UserResourcesController
     def associated_resources
         Offer.where(user_id: params[:user_id])
     end
+    def nested_response(offers)
+        offers.as_json({include: {user:{only:[:id, :first_name]}}})
+    end
     def new_resource
         offer_attributes = resource_params
         offer_attributes = offer_attributes.merge(user_id: params[:user_id])
