@@ -7,6 +7,7 @@ class Ability
     if user.present?
       can :manage, [PantryItem, PantryRequest, Offer, Claim, Neighbor], user_id: user.id
       can :read, Neighborhood
+      can :read, [PantryItem, PantryRequest, Offer, Claim]
       can :create, [Neighborhood]
     end
     
