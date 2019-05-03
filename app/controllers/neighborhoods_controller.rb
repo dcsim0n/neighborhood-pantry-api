@@ -8,8 +8,8 @@ class NeighborhoodsController < ApplicationController
     def show
         neighborhood = Neighborhood.find(params[:id])
         authorize! :read, neighborhood
-        requests = neighborhood.pantry_requests.includes(:user)
-        items = neighborhood.pantry_items.includes(:user)
+        requests = neighborhood.pantry_requests.order(:created_at).includes(:user)
+        items = neighborhood.pantry_items.order(:created_at).includes(:user)
         #at some point maybe the address should be here too?
         #also we will eventually want to include the offers and claims here
         json_requests = requests.as_json({:include =>{:user=>{only:[:id,:first_name,:last_name]}}})
