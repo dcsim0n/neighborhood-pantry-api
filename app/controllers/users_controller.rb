@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-
-        render json: @user, status: :ok
+        user_info = @user.as_json(only: [:id, :email, :first_name, :last_name])
+        render json: user_info, status: :ok
     end
     def create
         @user = User.new(user_params)
