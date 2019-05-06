@@ -15,6 +15,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+        @user = User.find(params[:id])
+        authorize! :edit, @user
+        if(@user.update(user_params))
+            render json: user_info(@user), status: :ok
+        else
+            render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity
+        end
+    end
+
     def login
 
         @user = User.find_by(email: params[:email])
@@ -29,7 +39,7 @@ class UsersController < ApplicationController
 
     private
     def user_info(user)
-        user_info = @user.as_json(only: [:id, :email, :first_name, :last_name],include: :address)
+        user_info = @user.as_json(only: [:id, :email, :first_name, :last_name],include: [:address,:neighborhoods])
     end
     def user_params
         params.permit(
