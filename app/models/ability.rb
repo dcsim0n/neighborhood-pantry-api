@@ -8,7 +8,7 @@ class Ability
       can :manage, [PantryItem, PantryRequest, Offer, Claim, Neighbor], user_id: user.id
       can :manage, User, id: user.id
       can :read, Neighborhood
-      can :read, [PantryItem, PantryRequest, Offer, Claim]
+      can :read, [PantryItem, PantryRequest, Offer, Claim, NilClass]
       can :create, [Neighborhood]
     end
     
